@@ -1,0 +1,18 @@
+<div style="display:table; margin: auto;">
+    <!-- <p>Current Word: {{word}}</p> -->
+    <div [ngClass] = "{'alert alert-success': classType === 'win', 'alert alert-danger': classType === 'error', '': classType === 'none'}"> {{ errorStr }} </div>
+    <form #wordleForm = "ngForm">
+        <div class="form-group">
+            <label for="word">Enter Guess</label>
+            <input [(ngModel)] = "guess" type="text" class="form-control" name="guess" placeholder="Enter word">
+        </div>
+        <button *ngIf="!finished" type="submit" class="btn btn-primary" (click) = "onSubmit()">Submit</button>
+        <button *ngIf="finished" type="submit" class="btn btn-primary" (click) = "restart()">Play Again</button>
+    </form>
+</div>
+<div [style.display]="'table'" [style.margin]="'auto'" id="gameInformation">
+    <tr *ngFor="let guess of guesses.slice().reverse(); let i = index">
+        <td>Guess: {{guesses[i]}} | Number of Correct Letters: {{correctLetters[i]}} | Number of Correct Positions: {{correctPositions[i]}} | {{lengthMsgs[i]}}</td> 
+        <!-- | Number of Correct Letters: correctLetters[i] | Number of Correct Positions: correctLetters[i] | lengthMsgs[i] -->
+    </tr>
+</div>
